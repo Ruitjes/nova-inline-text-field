@@ -80,10 +80,10 @@ export default {
         this.editing = false;
         this.field.value = this.fieldValue;
 
-        Nova.success("Bijgewerkt");
+        Nova.success("Deelnemer is bijgewerkt");
       } catch (e) {
         console.error(e);
-        Nova.error("Er is een probleem opgetreden!!");
+        Nova.error(e.response.data.message);
       }
       this.loading = false;
     },
