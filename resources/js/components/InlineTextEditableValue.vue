@@ -33,11 +33,9 @@
 import EditIcon from '../icons/EditIcon';
 import CancelIcon from '../icons/CancelIcon';
 import ConfirmIcon from '../icons/ConfirmIcon';
-import InteractsWithResourceInformation from 'nova/mixins/InteractsWithResourceInformation';
 
 export default {
   props: ['resourceName', 'field'],
-  mixins: [InteractsWithResourceInformation],
   components: { EditIcon, CancelIcon, ConfirmIcon },
 
   data: () => ({
@@ -82,14 +80,10 @@ export default {
         this.editing = false;
         this.field.value = this.fieldValue;
 
-        Nova.success(
-          this.__('The :resource was updated!', {
-            resource: this.resourceInformation.singularLabel.toLowerCase(),
-          })
-        );
+        Nova.success("Bijgewerkt");
       } catch (e) {
         console.error(e);
-        Nova.error(this.__('There was a problem submitting the form.'));
+        Nova.error("Er is een probleem opgetreden!!");
       }
       this.loading = false;
     },
