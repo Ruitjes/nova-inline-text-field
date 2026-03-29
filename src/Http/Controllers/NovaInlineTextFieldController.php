@@ -38,6 +38,10 @@ class NovaInlineTextFieldController extends Controller
             $allFields = collect($resource->fields($request));
             $field = $this->findField($allFields, $attribute);
 
+            if ($field && $field->isReadonly($request)) {
+                return response()->json(['message' => 'This field is readonly.'], 403);
+            }
+
             $field->fillInto($request, $model, $attribute);
             $model->save();
         } catch (Exception $e) {

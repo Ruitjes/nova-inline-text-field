@@ -5,7 +5,7 @@
     @dblclick.stop.capture="startEditing"
   >
     <template v-if="!editing">
-      <EditIcon @click.stop.capture="startEditing" />
+      <EditIcon v-if="!field.readonly" @click.stop.capture="startEditing" />
 
       <div :style="contentStyle" v-if="!hasValue"><p>&mdash;</p></div>
       <div :style="contentStyle" v-else-if="field.asHtml" v-html="value"></div>
@@ -54,7 +54,7 @@ export default {
     },
 
     startEditing() {
-      if (this.editing) return;
+      if (this.editing || this.field.readonly) return;
       this.fieldValue = typeof this.value === 'number' ? this.value || '' : (this.value || '').trim();
       this.editing = true;
 
